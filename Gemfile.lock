@@ -61,6 +61,7 @@ PLATFORMS
 DEPENDENCIES
   aruba
   bundler (~> 1.16)
+  cucumber
   ks!
   rake (~> 10.0)
   rspec (~> 3.0)
