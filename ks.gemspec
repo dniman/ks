@@ -28,4 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "cucumber", "~> 3.1.0"
   spec.add_development_dependency "aruba", "~> 0.14.5"
+
+  spec.add_dependency "thor"
 end
