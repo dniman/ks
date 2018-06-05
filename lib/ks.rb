@@ -1,5 +1,6 @@
 require "ks/version"
+require "ks/cli"
 
-module Ks
+module KS
   # Your code goes here...
 end

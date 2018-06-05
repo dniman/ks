@@ -1,5 +1,5 @@
-RSpec.describe Ks do
+RSpec.describe KS do
   it "has a version number" do
-    expect(Ks::VERSION).not_to be nil
+    expect(KS::VERSION).not_to be nil
   end
 end

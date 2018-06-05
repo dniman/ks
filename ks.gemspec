@@ -5,7 +5,7 @@ require "ks/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "ks"
-  spec.version       = Ks::VERSION
+  spec.version       = KS::VERSION
   spec.authors       = ["dniman"]
   spec.email         = ["dade.niman@gmail.com"]
 
