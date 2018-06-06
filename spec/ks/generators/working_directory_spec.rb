@@ -6,19 +6,24 @@ RSpec.describe KS::Generators::WorkingDirectory do
 
   describe "#generate_working_directory" do
     
+    before do
+      @tmp = Dir.mktmpdir('new_empty_directory')
+      @cwd = Dir.pwd
+      Dir.chdir(@tmp)
+    end
+
+    after do
+      Dir.chdir(@cwd)
+      FileUtils.rm_rf(@tmp)
+    end
+
     it "creates new empty directory" do
       args, opts = Thor::Options.split(["new_empty_directory"])
       config = {}
 
-      tmp = Dir.mktmpdir('new_empty_directory')
-      cwd = Dir.pwd
-      Dir.chdir(tmp)
-
       instance = described_class.new(args,opts,config)
-      expect(capture(:stdout) { instance.generate_working_directory }).to include("create  new_empty_directory")
-
-      Dir.chdir(cwd)
-      FileUtils.rm_rf(tmp)
+      expect { instance.generate_working_directory }.to output(/create  new_empty_directory/).to_stdout
+      expect(File.directory?("new_empty_directory")).to be_truthy
     end
 
   end
