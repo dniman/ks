@@ -9,6 +9,8 @@ Feature: New working directory
       Then the output should contain: 
       """
       create  working_directory
+      create  working_directory/exe
+      create  working_directory/exe/ks
       """
     
     Scenario: Print warning message

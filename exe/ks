@@ -1,5 +1,27 @@
 #!/usr/bin/env ruby
+require 'pathname'
+
+RUBY = Gem.ruby
+EXECUTABLES = ['exe/ks']
+
+original_pwd = Dir.pwd
+
+loop do
+  if exe = EXECUTABLES.find {|exe| File.file?(exe)}
+    contents = File.read(exe)
+
+    if contents =~ /APP_PATH/
+      exec RUBY, exe, *ARGV
+    end
+  end
+
+  # Restore the original cwd if root directory
+  Dir.chdir(original_pwd) and break if Pathname.new(Dir.pwd).root?
+
+  # Otherwise keep moving upwards in search of an executable.
+  Dir.chdir('..')
+end
+
 
 require "ks/cli"
-
 KS::CLI.start
