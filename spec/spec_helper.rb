@@ -12,3 +12,16 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+RSpec.shared_examples "working-directory" do
+  before do
+    @tmp = Dir.mktmpdir('working-directory')
+    @cwd = Dir.pwd
+    Dir.chdir(@tmp)
+  end
+
+  after do
+    Dir.chdir(@cwd)
+    FileUtils.rm_rf(@tmp)
+  end
+end
