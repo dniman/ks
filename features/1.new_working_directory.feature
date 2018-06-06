@@ -8,6 +8,14 @@ Feature: New working directory
       When I run `ks new working_directory`
       Then the output should contain: 
       """
-      create  
+      create  working_directory
       """
-      
+    
+    Scenario: Print warning message
+      Given I am already inside some working directory 
+      When I run `ks new working_directory`
+      Then the output should contain:
+      """
+      Can't generate a new working directory within the directory of another, please change to a non-working directory first.
+      For details run: ks --help
+      """ 
