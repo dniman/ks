@@ -26,6 +26,14 @@ RSpec.describe KS::Generators::WorkingDirectory do
       expect(File.directory?("new_empty_directory")).to be_truthy
     end
 
+    it "creates exe directory" do
+      args, opts = Thor::Options.split(["new_empty_directory"])
+      config = {}
+
+      instance = described_class.new(args,opts,config)
+      expect { instance.generate_exe_files }.to output(/create  new_empty_directory\/exe/).to_stdout
+    end
+
   end
 
 end
