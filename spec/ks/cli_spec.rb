@@ -13,7 +13,7 @@ RSpec.describe KS::CLI do
       Dir.chdir(tmp)
 
       instance = described_class.new(args,opts,config)
-      expect(capture(:stdout) { instance.new("working_directory") }).to eq("      create  working_directory\n")
+      expect{ instance.new("working_directory") }.to output("      create  working_directory\n").to_stdout
 
       Dir.chdir(cwd)
       FileUtils.rm_rf(tmp)
