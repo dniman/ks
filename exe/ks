@@ -7,14 +7,15 @@ EXECUTABLES = ['exe/ks']
 original_pwd = Dir.pwd
 
 loop do
-  if exe = EXECUTABLES.find {|exe| File.file?(exe)}
+
+  if exe = EXECUTABLES.find {|file| File.file?(file)}
     contents = File.read(exe)
 
-    if contents =~ /APP_PATH/
+    if contents =~ /(APP)_PATH/
       exec RUBY, exe, *ARGV
     end
   end
-
+  
   # Restore the original cwd if root directory
   Dir.chdir(original_pwd) and break if Pathname.new(Dir.pwd).root?
 
