@@ -25,5 +25,10 @@ module KS
       KS::Generators::WorkingDirectory.start(args)
     end
 
+    desc "generate migration [NAME]", "Generate database migration file"
+    def generate(*args)
+      msg = "Can't run command outside of working directory" 
+      raise Error,msg unless self.class.app_root
+    end
   end
 end  
