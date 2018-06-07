@@ -39,4 +39,20 @@ RSpec.describe KS::CLI do
     end
   end
 
+  describe "#generate" do
+    context "when .app_root is nil" do
+      let(:args) { Thor::Options.split(["generate","migration","new_migration"])[0] }
+      let(:opts) { Thor::Options.split(["generate","migration","new_migration"])[1] }
+      let(:config) { Hash.new }
+
+      it "prints error message" do
+        instance = described_class.new(args,opts,config)
+        allow(described_class).to receive(:app_root).and_return(nil)
+
+        msg = "Can't run command outside of working directory"
+        expect { instance.generate(args,opts,config) }.to raise_error(Thor::Error, msg)
+      end
+    end
+  end
+
 end
