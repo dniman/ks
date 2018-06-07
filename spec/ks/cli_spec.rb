@@ -11,10 +11,10 @@ RSpec.describe KS::CLI do
       include_context "working-directory"
       
       it "creates new working directory" do
-        msg = <<~MSG
-              create  working_directory
-              create  working_directory/exe
-              create  working_directory/exe/ks
+        msg = <<-MSG
+      create  working_directory
+      create  working_directory/exe
+      create  working_directory/exe/ks
         MSG
 
         instance = described_class.new(args,opts,config)

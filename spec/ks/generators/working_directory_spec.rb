@@ -36,4 +36,18 @@ RSpec.describe KS::Generators::WorkingDirectory do
 
   end
 
+  describe ".source_root" do
+    context "when path is specified" do
+      it "sets template path" do
+        tmp = Dir.mktmpdir
+        expect(described_class.source_root(tmp)).to eq(tmp)
+      end
+    end
+    context "when path is not specified" do
+      it "sets class name in templates" do
+        expect(described_class.source_root).to eq(described_class.source_root)
+      end
+    end
+  end
+
 end
