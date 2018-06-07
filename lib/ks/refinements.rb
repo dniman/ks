@@ -1,0 +1,1 @@
+require "ks/refinements/string_refinements"
