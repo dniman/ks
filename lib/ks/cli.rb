@@ -29,6 +29,7 @@ module KS
     def generate(*args)
       msg = "Can't run command outside of working directory" 
       raise Error,msg unless self.class.app_root
+      KS::Generators::Migration.start(args)
     end
   end
 end  

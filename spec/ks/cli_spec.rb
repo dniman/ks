@@ -58,7 +58,7 @@ RSpec.describe KS::CLI do
       include_context "temp_directory"
       it "creates migration" do
         instance = described_class.new(args,opts,config)
-        instance.new(args,opts,config)
+        allow(described_class).to receive(:app_root).and_return(Dir.mktmpdir)
 
         expect { instance.generate(args,opts,config)}.to output(/create  working_directory\/db\//).to_stdout
       end
