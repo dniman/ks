@@ -7,17 +7,28 @@ Feature: New working directory
     Scenario: Create new working directory
       When I run `ks new working_directory`
       Then the output should contain: 
+      
       """
-      create  working_directory
-      create  working_directory/exe
-      create  working_directory/exe/ks
+            create  working_directory
+      """
+      And the output should contain:
+      """
+            create  working_directory/exe
+      """
+      And the output should contain:
+      """
+            create  working_directory/exe/ks
       """
     
     Scenario: Print warning message
       Given I am already inside some working directory 
       When I run `ks new working_directory`
       Then the output should contain:
+    
       """
       Can't generate a new working directory within the directory of another, please change to a non-working directory first.
+      """
+      And the output should contain:
+      """
       For details run: ks --help
       """ 
