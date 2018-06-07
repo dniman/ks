@@ -11,3 +11,11 @@ Feature: Generate migration
     """
     Can't run command outside of working directory
     """
+
+    Scenario: Create migration
+    Given I am inside working directory
+    When I run `ks generate migration new_migration`
+    Then the output should contain:
+    """
+          create  working_directory/db/...new_migration.sql  
+    """
