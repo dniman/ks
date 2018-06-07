@@ -13,9 +13,9 @@ RSpec.configure do |config|
   end
 end
 
-RSpec.shared_examples "working-directory" do
+RSpec.shared_examples "working_directory" do
   before do
-    @tmp = Dir.mktmpdir('working-directory')
+    @tmp = Dir.mktmpdir('working_directory')
     @cwd = Dir.pwd
     Dir.chdir(@tmp)
   end
