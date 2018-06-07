@@ -1,4 +1,4 @@
 APP_PATH = File.expand_path('../..', __FILE__)
 require 'ks/cli'
 
-KS::Cli.start ARGV, :app_root => APP_PATH
+KS::CLI.start ARGV, :app_root => APP_PATH
