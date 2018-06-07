@@ -8,7 +8,7 @@ RSpec.describe KS::CLI do
     let(:config) { Hash.new }
 
     context "when .app_root is unset" do  
-      include_context "working_directory"
+      include_context "temp_directory"
       
       it "creates new working directory" do
         msg = <<-MSG
@@ -23,7 +23,7 @@ RSpec.describe KS::CLI do
     end
 
     context "when .app_root is set" do
-      include_context "working_directory"
+      include_context "temp_directory"
  
       it "prints error message" do
         instance = described_class.new(args,opts,config)
