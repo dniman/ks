@@ -40,11 +40,11 @@ RSpec.describe KS::CLI do
   end
 
   describe "#generate" do
-    context "when .app_root is nil" do
-      let(:args) { Thor::Options.split(["generate","migration","new_migration"])[0] }
-      let(:opts) { Thor::Options.split(["generate","migration","new_migration"])[1] }
-      let(:config) { Hash.new }
+    let(:args) { Thor::Options.split(["generate","migration","new_migration"])[0] }
+    let(:opts) { Thor::Options.split(["generate","migration","new_migration"])[1] }
+    let(:config) { Hash.new }
 
+    context "when .app_root is nil" do
       it "prints error message" do
         instance = described_class.new(args,opts,config)
         allow(described_class).to receive(:app_root).and_return(nil)
@@ -53,6 +53,15 @@ RSpec.describe KS::CLI do
         expect { instance.generate(args,opts,config) }.to raise_error(Thor::Error, msg)
       end
     end
-  end
 
+    context "when .app_root is not nill" do
+      include_context "temp_directory"
+      it "creates migration" do
+        instance = described_class.new(args,opts,config)
+        instance.new(args,opts,config)
+
+        expect { instance.generate(args,opts,config)}.to output(/create  working_directory\/db\//).to_stdout
+      end
+    end
+  end
 end
