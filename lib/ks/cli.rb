@@ -1,5 +1,6 @@
 require 'thor'
 require 'ks/generators/working_directory'
+require "ks/generators/migration"
 
 module KS
   class CLI < Thor
@@ -21,15 +22,26 @@ module KS
         For details run: ks --help
       MSG
 
-      raise Error,msg if self.class.app_root
+      raise Error,msg if app_root
       KS::Generators::WorkingDirectory.start(args)
     end
 
     desc "generate migration [NAME]", "Generate database migration file"
     def generate(*args)
       msg = "Can't run command outside of working directory" 
-      raise Error,msg unless self.class.app_root
-      KS::Generators::Migration.start(args)
+      raise Error, msg unless app_root
+      subcommand = args.shift
+      
+      if subcommand == "migration"
+        KS::Generators::Migration.start(args)       
+      end
     end
+
+    def initialize(args = [], local_options = {}, config = {})
+      @app_root = config[:app_root]
+      super
+    end
+
+    attr_reader :app_root
   end
 end  
