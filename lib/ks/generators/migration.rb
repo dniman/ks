@@ -16,7 +16,7 @@ module KS
       protected
 
       def migration_file_name
-        "#{destination_root}/#{migration_path}/#{migration_number}_#{underscored_name}.sql"
+        "#{migration_path}/#{migration_number}_#{underscored_name}.sql"
       end
 
       def migration_path
