@@ -15,7 +15,4 @@ Feature: Generate migration
     Scenario: Create migration
     Given I am inside working directory
     When I run `ks generate migration new_migration`
-    Then the output should contain:
-    """
-          create  working_directory/db/...new_migration.sql  
-    """
+    Then the output should include "create  db/migrations/\d{14}_new_migration.sql"
