@@ -55,7 +55,7 @@ RSpec.describe KS::CLI do
       context "migration" do
         it "creates migration" do
           instance = described_class.new(["migration","new_migration"],{},{:app_root => Dir.mktmpdir})
-          expect { instance.generate(*instance.args) }.to output(/\d{14}_new_migration.sql/).to_stdout
+          expect { instance.generate(*instance.args) }.to output(/     create  db\/migrations\/\d{14}_new_migration.sql/).to_stdout
         end
       end
     end
