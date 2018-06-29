@@ -13,6 +13,12 @@ module KS
         end
       end
 
+      def generate_proc_files
+        if name.match?(/^create_procedure_/)
+          create_file proc_file_name
+        end
+      end  
+
       protected
 
       def migration_file_name
@@ -31,6 +37,13 @@ module KS
         name.underscore
       end
 
+      def proc_file_name
+        "#{proc_path}/#{name.gsub(/create_procedure_/,"")}.prc"
+      end
+
+      def proc_path
+        "src/proc"
+      end
     end
   end
 end
