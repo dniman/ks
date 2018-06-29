@@ -27,7 +27,8 @@ module KS
       NAME_PREFIXES = {
         "create_procedure" => {:proc => ".prc" },
         "create_function"  => {:func => ".udf"},
-        "create_view"      => {:view => ".viw"}
+        "create_view"      => {:view => ".viw"},
+        "create_trig"      => {:trig => ".trg"}
       }
 
       def migration_file_name

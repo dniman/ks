@@ -37,7 +37,12 @@ RSpec.describe KS::Generators::Migration do
       it "creates view file" do
         instance = described_class.new(["create_view_some_view"])
         expect { instance.generate_src_file }.to output(/create  src\/view\/some_view.viw/).to_stdout
-      end      
+      end  
+      
+      it "creates trg file" do
+        instance = described_class.new(["create_trig_some_trig"])
+        expect { instance.generate_src_file }.to output(/create  src\/trig\/some_trig.trg/).to_stdout
+      end       
     end
 
     context "when -d options is specified" do
@@ -55,6 +60,11 @@ RSpec.describe KS::Generators::Migration do
         instance = described_class.new(["create_view_some_view"],config)
         expect { instance.generate_src_file }.to output(/create  src\/view\/some_directory\/some_view.viw/).to_stdout
       end      
+
+      it "creates trig file" do
+        instance = described_class.new(["create_trig_some_trig"],config)
+        expect { instance.generate_src_file }.to output(/create  src\/trig\/some_directory\/some_trig.trg/).to_stdout
+      end          
     end
 
   end  

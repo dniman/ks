@@ -84,7 +84,7 @@ RSpec.describe KS::CLI do
           end
 
           context "when -d option is specified" do
-            it "create proc file inside custom directory" do
+            it "create func file inside custom directory" do
               instance = described_class.new(["migration","create_function_new_function"],{:directory => "some_directory"},config)
 
               expect { instance.generate(*instance.args) }.to output(/\s*create  src\/func\/some_directory\/new_function.udf/).to_stdout
@@ -100,10 +100,26 @@ RSpec.describe KS::CLI do
           end
 
           context "when -d option is specified" do
-            it "create proc file inside custom directory" do
+            it "create view file inside custom directory" do
               instance = described_class.new(["migration","create_view_new_view"],{:directory => "some_directory"},config)
 
               expect { instance.generate(*instance.args) }.to output(/\s*create  src\/view\/some_directory\/new_view.viw/).to_stdout
+            end
+          end
+        end
+
+        context "when name begins with create_trig" do
+          it "creates migration and trig files" do
+            instance = described_class.new(["migration","create_trig_new_trig"],{},config)
+              
+            expect { instance.generate(*instance.args) }.to output(/\s*create  db\/migrations\/\d{14}_create_trig_new_trig.sql\s*create  src\/trig\/new_trig.trg/).to_stdout
+          end
+
+          context "when -d option is specified" do
+            it "create trig file inside custom directory" do
+              instance = described_class.new(["migration","create_trig_new_trig"],{:directory => "some_directory"},config)
+
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/trig\/some_directory\/new_trig.trg/).to_stdout
             end
           end
         end
