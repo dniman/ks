@@ -19,3 +19,12 @@ Feature: Generate migration
     """
     create  db/migrations/\d{14}_new_migration.sql
     """
+
+    Scenario: Create migration and proc file
+    Given I am inside working directory
+    When I run `ks generate migration create_procedure_new_procedure`
+    Then the output should match:
+    """
+    create  db/migrations/\d{14}_create_procedure_new_procedure.sql
+    create  src/proc/new_procedure.prc
+    """
