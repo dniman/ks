@@ -92,6 +92,22 @@ RSpec.describe KS::CLI do
           end
         end
 
+        context "when name begins with create_view" do
+          it "creates migration and view files" do
+            instance = described_class.new(["migration","create_view_new_view"],{},config)
+              
+            expect { instance.generate(*instance.args) }.to output(/\s*create  db\/migrations\/\d{14}_create_view_new_view.sql\s*create  src\/view\/new_view.viw/).to_stdout
+          end
+
+          context "when -d option is specified" do
+            it "create proc file inside custom directory" do
+              instance = described_class.new(["migration","create_view_new_view"],{:directory => "some_directory"},config)
+
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/view\/some_directory\/new_view.viw/).to_stdout
+            end
+          end
+        end
+
       end
     end
   end
