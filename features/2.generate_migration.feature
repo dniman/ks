@@ -79,3 +79,23 @@ Feature: Generate migration
       """
       create  src/view/some_directory/new_view.viw
       """ 
+
+    Scenario: Create migration and trig files
+      Given I am inside working directory
+      When I run `ks generate migration create_trig_new_trig`
+      Then the output should match:
+      """
+      create  db/migrations/\d{14}_create_trig_new_trig.sql
+      """
+      And the output should match:
+      """
+      create  src/trig/new_trig.trg
+      """
+
+    Scenario: Create trig file in custom directory
+      Given I am inside working directory
+      When I run `ks generate migration create_trig_new_trig -d some_directory`
+      Then the output should match:
+      """
+      create  src/trig/some_directory/new_trig.trg
+      """ 
