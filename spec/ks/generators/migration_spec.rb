@@ -22,6 +22,10 @@ RSpec.describe KS::Generators::Migration do
       expect { instance.generate_migration }.to output(/create  db\/migrations\/\d{14}_.*/).to_stdout
     end
 
+    it "creates proc file" do
+      instance = described_class.new(["create_procedure_some_procedure"])
+      expect { instance.generate_proc_file }.to output(/create  src\/proc\/some_procedure.prc/).to_stdout
+    end
   end
 
 end
