@@ -76,6 +76,22 @@ RSpec.describe KS::CLI do
           end
         end
 
+        context "when name begins with create_function" do
+          it "creates migration and func files" do
+            instance = described_class.new(["migration","create_function_new_function"],{},config)
+              
+            expect { instance.generate(*instance.args) }.to output(/\s*create  db\/migrations\/\d{14}_create_function_new_function.sql\s*create  src\/func\/new_function.udf/).to_stdout
+          end
+
+          context "when -d option is specified" do
+            it "create proc file inside custom directory" do
+              instance = described_class.new(["migration","create_function_new_function"],{:directory => "some_directory"},config)
+
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/func\/some_directory\/new_function.udf/).to_stdout
+            end
+          end
+        end
+
       end
     end
   end

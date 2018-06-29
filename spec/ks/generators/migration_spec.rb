@@ -7,6 +7,7 @@ RSpec.describe KS::Generators::Migration do
     include_context "temp_directory"
 
     let(:instance) { described_class.new(["migration_file"]) }
+    let(:config) { {:directory => "some_directory"} }
 
     it "creates migration file" do
       allow(instance).to receive(:migration_number).and_return("1234")
@@ -31,11 +32,24 @@ RSpec.describe KS::Generators::Migration do
 
     context "when -d options is specified" do
       it "creates proc file" do
-        instance = described_class.new(["create_procedure_some_procedure"],{:directory => "some_directory" })
+        instance = described_class.new(["create_procedure_some_procedure"],config)
         expect { instance.generate_proc_file }.to output(/create  src\/proc\/some_directory\/some_procedure.prc/).to_stdout
+      end
+    end
+
+    context "when -d option is not specified" do
+      it "creates func file" do
+        instance = described_class.new(["create_function_some_function"])
+        expect { instance.generate_func_file }.to output(/create  src\/func\/some_function.udf/).to_stdout
+      end
+    end
+
+    context "when -d options is specified" do
+      it "creates func file" do
+        instance = described_class.new(["create_function_some_function"],config)
+        expect { instance.generate_func_file }.to output(/create  src\/func\/some_directory\/some_function.udf/).to_stdout
       end
     end
 
   end  
 end
-

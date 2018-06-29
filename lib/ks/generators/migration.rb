@@ -20,6 +20,12 @@ module KS
         end
       end  
 
+      def generate_func_file
+        if name.match?(/^create_function_/)
+          create_file func_file_name
+        end
+      end
+
       protected
 
       def migration_file_name
@@ -44,6 +50,14 @@ module KS
 
       def proc_path
         "src/proc"
+      end
+
+      def func_file_name
+        options[:directory] ? "#{func_path}/#{options[:directory]}/#{name.gsub(/create_function_/,"")}.udf" : "#{func_path}/#{name.gsub(/create_function_/,"")}.udf"
+      end
+
+      def func_path
+        "src/func"
       end
     end
   end
