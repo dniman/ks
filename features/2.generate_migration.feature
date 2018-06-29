@@ -49,7 +49,7 @@ Feature: Generate migration
     """
     And the output should match:
     """
-    create  src/func/new_function.prc
+    create  src/func/new_function.udf
     """
 
     Scenario: Create func file in custom directory
@@ -57,5 +57,5 @@ Feature: Generate migration
     When I run `ks generate migration create_function_new_function -d some_directory`
     Then the output should match:
     """
-    create  src/func/some_directory/new_function.prc
+    create  src/func/some_directory/new_function.udf
     """    
