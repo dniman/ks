@@ -13,7 +13,7 @@ module KS
         end
       end
 
-      def generate_proc_files
+      def generate_proc_file
         if name.match?(/^create_procedure_/)
           create_file proc_file_name
         end
