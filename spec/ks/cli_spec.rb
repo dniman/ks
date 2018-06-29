@@ -59,14 +59,23 @@ RSpec.describe KS::CLI do
           instance = described_class.new(["migration","new_migration"],{},config)
           expect { instance.generate(*instance.args) }.to output(/     create  db\/migrations\/\d{14}_new_migration.sql/).to_stdout
         end
-
+  
         context "when name begins with create_procedure" do
           it "creates migration and proc file" do
             instance = described_class.new(["migration","create_procedure_new_procedure"],{},config)
-            
+              
             expect { instance.generate(*instance.args) }.to output(/\s*create  db\/migrations\/\d{14}_create_procedure_new_procedure.sql\s*create  src\/proc\/new_procedure.prc/).to_stdout
           end
+
+          context "when -d option is specified" do
+            it "create proc file inside custom directory" do
+              instance = described_class.new(["migration","create_procedure_new_procedure"],{:directory => "some_directory"},config)
+
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/proc\/some_directory\/new_procedure.prc/).to_stdout
+            end
+          end
         end
+
       end
     end
   end
