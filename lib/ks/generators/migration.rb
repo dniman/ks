@@ -5,6 +5,7 @@ module KS
       using StringRefinements
 
       argument :name, :type => :string
+      class_option :directory, :type => :string
 
       def generate_migration
         context = instance_eval('binding')
@@ -38,7 +39,7 @@ module KS
       end
 
       def proc_file_name
-        "#{proc_path}/#{name.gsub(/create_procedure_/,"")}.prc"
+        options[:directory] ? "#{proc_path}/#{options[:directory]}/#{name.gsub(/create_procedure_/,"")}.prc" : "#{proc_path}/#{name.gsub(/create_procedure_/,"")}.prc"
       end
 
       def proc_path
