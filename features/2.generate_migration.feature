@@ -39,4 +39,23 @@ Feature: Generate migration
     """
     create  src/proc/some_directory/new_procedure.prc
     """
-    
+
+    Scenario: Create migration and func files
+    Given I am inside working directory
+    When I run `ks generate migration create_function_new_function`
+    Then the output should match:
+    """
+    create  db/migrations/\d{14}_create_function_new_function.sql
+    """
+    And the output should match:
+    """
+    create  src/func/new_function.prc
+    """
+
+    Scenario: Create func file in custom directory
+    Given I am inside working directory
+    When I run `ks generate migration create_function_new_function -d some_directory`
+    Then the output should match:
+    """
+    create  src/func/some_directory/new_function.prc
+    """    
