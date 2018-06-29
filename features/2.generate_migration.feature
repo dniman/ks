@@ -69,7 +69,7 @@ Feature: Generate migration
       """
       And the output should match:
       """
-      create  src/view/new_view.udf
+      create  src/view/new_view.viw
       """
 
     Scenario: Create view file in custom directory
@@ -77,5 +77,5 @@ Feature: Generate migration
       When I run `ks generate migration create_view_new_view -d some_directory`
       Then the output should match:
       """
-      create  src/view/some_directory/new_view.udf
+      create  src/view/some_directory/new_view.viw
       """ 
