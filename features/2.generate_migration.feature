@@ -31,3 +31,12 @@ Feature: Generate migration
     """
     create  src/proc/new_procedure.prc
     """
+
+    Scenario: Create proc file in custom directory
+    Given I am inside working directory
+    When I run `ks generate migration create_procedure_new_procedure -d some_directory`
+    Then the output should match:
+    """
+    create  src/proc/some_directory/new_procedure.prc
+    """
+    
