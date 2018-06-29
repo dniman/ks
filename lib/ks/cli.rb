@@ -27,13 +27,14 @@ module KS
     end
 
     desc "generate migration [NAME]", "Generate database migration file"
+    option :directory, :type => :string, :alias => :d
     def generate(*args)
       msg = "Can't run command outside of working directory" 
       raise Error, msg unless app_root
       subcommand = args.shift
       
       if subcommand == "migration"
-        KS::Generators::Migration.start(args)       
+        KS::Generators::Migration.start(args,{:class_options => options})       
       end
     end
 
