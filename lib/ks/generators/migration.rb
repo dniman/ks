@@ -14,19 +14,20 @@ module KS
         end
       end
 
-      def generate_proc_file
-        if name.match?(/^create_procedure_/)
-          create_file proc_file_name
-        end
-      end  
-
-      def generate_func_file
-        if name.match?(/^create_function_/)
-          create_file func_file_name
+      def generate_src_file
+        NAME_PREFIXES.keys.each do |prefix|
+          if name.match?(/^#{prefix}_/)
+            create_file src_file_name(prefix)
+          end
         end
       end
 
       protected
+
+      NAME_PREFIXES = {
+        "create_procedure" => {:proc => ".prc" },
+        "create_function"  => {:func => ".udf"}
+      }
 
       def migration_file_name
         "#{migration_path}/#{migration_number}_#{underscored_name}.sql"
@@ -44,21 +45,14 @@ module KS
         name.underscore
       end
 
-      def proc_file_name
-        options[:directory] ? "#{proc_path}/#{options[:directory]}/#{name.gsub(/create_procedure_/,"")}.prc" : "#{proc_path}/#{name.gsub(/create_procedure_/,"")}.prc"
+      def src_file_name(prefix)
+        if options[:directory]
+          "src/#{NAME_PREFIXES[prefix].keys[0].to_s}/#{options[:directory]}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
+        else
+          "src/#{NAME_PREFIXES[prefix].keys[0].to_s}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
+        end  
       end
 
-      def proc_path
-        "src/proc"
-      end
-
-      def func_file_name
-        options[:directory] ? "#{func_path}/#{options[:directory]}/#{name.gsub(/create_function_/,"")}.udf" : "#{func_path}/#{name.gsub(/create_function_/,"")}.udf"
-      end
-
-      def func_path
-        "src/func"
-      end
     end
   end
 end
