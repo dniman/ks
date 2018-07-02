@@ -17,7 +17,9 @@ module KS
       def generate_src_file
         NAME_PREFIXES.keys.each do |prefix|
           if name.match?(/^#{prefix}_/)
-            create_file src_file_name(prefix)
+            create_file src_file_name(prefix) do
+              "<%= File.read(\"#{migration_file_name}\") %>"
+            end
           end
         end
       end
@@ -33,7 +35,7 @@ module KS
       }
 
       def migration_file_name
-        "#{migration_path}/#{migration_number}_#{underscored_name}.sql"
+        @migration_file_name ||= "#{migration_path}/#{migration_number}_#{underscored_name}.sql"
       end
 
       def migration_path
