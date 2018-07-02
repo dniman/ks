@@ -15,7 +15,7 @@ Feature: Render
     Scenario: Copy content
       Given I am inside working_directory
       When I run `ks render`
-      Then the output should contain:
+      Then the output should match:
       """
       update  src\/*
       """
