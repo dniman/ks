@@ -71,7 +71,7 @@ RSpec.describe KS::CLI do
             it "create proc file inside custom directory" do
               instance = described_class.new(["migration","create_procedure_new_procedure"],{:directory => "some_directory"},config)
 
-              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/proc\/some_directory\/new_procedure.prc/).to_stdout
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/some_directory\/new_procedure.prc/).to_stdout
             end
           end
         end
@@ -87,7 +87,7 @@ RSpec.describe KS::CLI do
             it "create func file inside custom directory" do
               instance = described_class.new(["migration","create_function_new_function"],{:directory => "some_directory"},config)
 
-              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/func\/some_directory\/new_function.udf/).to_stdout
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/some_directory\/new_function.udf/).to_stdout
             end
           end
         end
@@ -103,7 +103,7 @@ RSpec.describe KS::CLI do
             it "create view file inside custom directory" do
               instance = described_class.new(["migration","create_view_new_view"],{:directory => "some_directory"},config)
 
-              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/view\/some_directory\/new_view.viw/).to_stdout
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/some_directory\/new_view.viw/).to_stdout
             end
           end
         end
@@ -119,7 +119,7 @@ RSpec.describe KS::CLI do
             it "create trig file inside custom directory" do
               instance = described_class.new(["migration","create_trig_new_trig"],{:directory => "some_directory"},config)
 
-              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/trig\/some_directory\/new_trig.trg/).to_stdout
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/some_directory\/new_trig.trg/).to_stdout
             end
           end
         end
@@ -135,7 +135,7 @@ RSpec.describe KS::CLI do
             it "create table file inside custom directory" do
               instance = described_class.new(["migration","create_table_new_table"],{:directory => "some_directory"},config)
 
-              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/table\/some_directory\/new_table.tab/).to_stdout
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/some_directory\/new_table.tab/).to_stdout
             end
           end
         end

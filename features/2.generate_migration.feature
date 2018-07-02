@@ -37,7 +37,7 @@ Feature: Generate migration
       When I run `ks generate migration create_procedure_new_procedure -d some_directory`
       Then the output should match:
       """
-      create  src/proc/some_directory/new_procedure.prc
+      create  src/some_directory/new_procedure.prc
       """
 
     Scenario: Create migration and func files
@@ -57,7 +57,7 @@ Feature: Generate migration
       When I run `ks generate migration create_function_new_function -d some_directory`
       Then the output should match:
       """
-      create  src/func/some_directory/new_function.udf
+      create  src/some_directory/new_function.udf
       """    
 
     Scenario: Create migration and view files
@@ -69,7 +69,7 @@ Feature: Generate migration
       """
       And the output should match:
       """
-      create  src/view/new_view.viw
+      create  src/new_view.viw
       """
 
     Scenario: Create view file in custom directory
@@ -77,7 +77,7 @@ Feature: Generate migration
       When I run `ks generate migration create_view_new_view -d some_directory`
       Then the output should match:
       """
-      create  src/view/some_directory/new_view.viw
+      create  src/some_directory/new_view.viw
       """ 
 
     Scenario: Create migration and trig files
@@ -97,7 +97,7 @@ Feature: Generate migration
       When I run `ks generate migration create_trig_new_trig -d some_directory`
       Then the output should match:
       """
-      create  src/trig/some_directory/new_trig.trg
+      create  src/some_directory/new_trig.trg
       """ 
 
     Scenario: Create migration and table files
@@ -117,5 +117,5 @@ Feature: Generate migration
       When I run `ks generate migration create_table_new_table -d some_directory`
       Then the output should match:
       """
-      create  src/table/some_directory/new_table.tab
+      create  src/some_directory/new_table.tab
       """       

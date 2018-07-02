@@ -50,7 +50,7 @@ module KS
 
       def src_file_name(prefix)
         if options[:directory]
-          "src/#{NAME_PREFIXES[prefix].keys[0].to_s}/#{options[:directory]}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
+          "src/#{options[:directory]}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
         else
           "src/#{NAME_PREFIXES[prefix].keys[0].to_s}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
         end  
