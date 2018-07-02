@@ -23,6 +23,6 @@ RSpec.shared_examples "temp_directory" do
 
   after do
     Dir.chdir(@cwd)
-    #FileUtils.rm_rf(@tmp)
+    FileUtils.rm_rf(@tmp)
   end
 end
