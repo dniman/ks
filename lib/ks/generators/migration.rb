@@ -28,7 +28,8 @@ module KS
         "create_procedure" => {:proc => ".prc" },
         "create_function"  => {:func => ".udf"},
         "create_view"      => {:view => ".viw"},
-        "create_trig"      => {:trig => ".trg"}
+        "create_trig"      => {:trig => ".trg"},
+        "create_table"     => {:table => ".tab"}
       }
 
       def migration_file_name

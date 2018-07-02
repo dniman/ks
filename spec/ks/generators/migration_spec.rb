@@ -43,6 +43,11 @@ RSpec.describe KS::Generators::Migration do
         instance = described_class.new(["create_trig_some_trig"])
         expect { instance.generate_src_file }.to output(/create  src\/trig\/some_trig.trg/).to_stdout
       end       
+
+      it "creates table file" do
+        instance = described_class.new(["create_table_some_table"])
+        expect { instance.generate_src_file }.to output(/create  src\/table\/some_table.tab/).to_stdout
+      end 
     end
 
     context "when -d options is specified" do
@@ -64,7 +69,12 @@ RSpec.describe KS::Generators::Migration do
       it "creates trig file" do
         instance = described_class.new(["create_trig_some_trig"],config)
         expect { instance.generate_src_file }.to output(/create  src\/trig\/some_directory\/some_trig.trg/).to_stdout
-      end          
+      end 
+      
+      it "creates table file" do
+        instance = described_class.new(["create_table_some_table"],config)
+        expect { instance.generate_src_file }.to output(/create  src\/table\/some_directory\/some_table.tab/).to_stdout
+      end 
     end
 
   end  

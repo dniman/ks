@@ -99,3 +99,23 @@ Feature: Generate migration
       """
       create  src/trig/some_directory/new_trig.trg
       """ 
+
+    Scenario: Create migration and table files
+      Given I am inside working directory
+      When I run `ks generate migration create_table_new_table`
+      Then the output should match:
+      """
+      create  db/migrations/\d{14}_create_table_new_table.sql
+      """
+      And the output should match:
+      """
+      create  src/table/new_table.tab
+      """
+
+    Scenario: Create table file in custom directory
+      Given I am inside working directory
+      When I run `ks generate migration create_table_new_table -d some_directory`
+      Then the output should match:
+      """
+      create  src/table/some_directory/new_table.tab
+      """       

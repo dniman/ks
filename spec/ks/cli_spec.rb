@@ -124,6 +124,22 @@ RSpec.describe KS::CLI do
           end
         end
 
+        context "when name begins with create_table" do
+          it "creates migration and table files" do
+            instance = described_class.new(["migration","create_table_new_table"],{},config)
+              
+            expect { instance.generate(*instance.args) }.to output(/\s*create  db\/migrations\/\d{14}_create_table_new_table.sql\s*create  src\/table\/new_table.tab/).to_stdout
+          end
+
+          context "when -d option is specified" do
+            it "create table file inside custom directory" do
+              instance = described_class.new(["migration","create_table_new_table"],{:directory => "some_directory"},config)
+
+              expect { instance.generate(*instance.args) }.to output(/\s*create  src\/table\/some_directory\/new_table.tab/).to_stdout
+            end
+          end
+        end
+
       end
     end
   end
