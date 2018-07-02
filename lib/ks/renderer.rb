@@ -10,7 +10,6 @@ module KS
 
         if content =~ /File.read/
           context = instance_eval('binding')
-          puts context
           File.write(file_name,ERB.new(content).result(context))
           say_status :update, relative_to_original_destination_root(File.expand_path(file_name)), {:verbose => true}
         end  
