@@ -1,6 +1,7 @@
 require 'thor'
 require 'ks/generators/working_directory'
 require "ks/generators/migration"
+require "ks/renderer"
 
 module KS
   class CLI < Thor
@@ -36,6 +37,13 @@ module KS
       if subcommand == "migration"
         KS::Generators::Migration.start(args,{:class_options => options})       
       end
+    end
+
+    desc "render", "Copy content"
+    def render
+      msg = "Can't run command outside of working directory" 
+      raise Error, msg unless app_root
+      KS::Renderer.start      
     end
 
     def initialize(args = [], local_options = {}, config = {})

@@ -143,4 +143,39 @@ RSpec.describe KS::CLI do
       end
     end
   end
+
+  describe "#render" do
+    context "when #app_root is nil" do
+      it "prints error message" do
+        msg = "Can't run command outside of working directory"
+        
+        instance = described_class.new
+
+        expect { instance.render }.to raise_error(Thor::Error, msg)
+      end
+    end
+    
+    context "when #app_root is not nil" do
+      include_context "temp_directory"
+      let(:config) { {:app_root => Dir.mktmpdir} }
+
+      it "updates src files" do
+        pwd = Dir.pwd
+        Dir.mkdir("db")
+        Dir.chdir("db")
+        Dir.mkdir("migration")
+        Dir.chdir("migration")
+        File.write("1234_tmp.prc","Hello")
+        Dir.chdir(pwd)
+        mig_file = File.expand_path("db/migration/1234_tmp.prc")
+        Dir.mkdir("src")
+        File.write(File.join("src","tmp.prc"),"<%= File.read(\"#{mig_file}\") %>")
+
+        instance = described_class.new(["render"],{},config)
+
+        expect { instance.render }.to output(/\s*update  src\/*/).to_stdout
+      end
+
+    end
+  end
 end

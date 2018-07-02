@@ -12,3 +12,10 @@ Feature: Render
       Can't run command outside of working directory
       """
 
+    Scenario: Copy content
+      Given I am inside working_directory
+      When I run `ks render`
+      Then the output should contain:
+      """
+      update  src\/*
+      """
