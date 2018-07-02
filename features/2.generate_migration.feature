@@ -69,7 +69,7 @@ Feature: Generate migration
       """
       And the output should match:
       """
-      create  src/new_view.viw
+      create  src/view/new_view.viw
       """
 
     Scenario: Create view file in custom directory
