@@ -9,12 +9,19 @@ module KS
         content = File.readlines(file_name).first
 
         if content =~ /File.read/
-          context = instance_eval('binding')
-
-          File.open(file_name,"w:windows-1251").write(ERB.new("#{content}").result(context))
+          rewrite file_name, content
           say_status :update, relative_to_original_destination_root(File.expand_path(file_name)), {:verbose => true}
         end  
       end
+    end
+
+    protected
+
+    def rewrite(file_name,content)
+      context = instance_eval('binding')
+      File.open(file_name,"w:windows-1251") do |f|
+        f.write ERB.new("#{content}").result(context)
+      end  
     end
 
   end

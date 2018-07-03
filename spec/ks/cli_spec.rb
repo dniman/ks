@@ -160,20 +160,10 @@ RSpec.describe KS::CLI do
       let(:config) { {:app_root => Dir.mktmpdir} }
 
       it "updates src files" do
-        pwd = Dir.pwd
-        Dir.mkdir("db")
-        Dir.chdir("db")
-        Dir.mkdir("migration")
-        Dir.chdir("migration")
-        File.write("1234_tmp.prc","Hello")
-        Dir.chdir(pwd)
-        mig_file = File.expand_path("db/migration/1234_tmp.prc")
-        Dir.mkdir("src")
-        File.write(File.join("src","tmp.prc"),"<%= File.read(\"#{mig_file}\") %>")
-
         instance = described_class.new(["render"],{},config)
 
-        expect { instance.render }.to output(/\s*update  src\/*/).to_stdout
+        expect(KS::Renderer).to receive(:start)
+        instance.render
       end
 
     end
