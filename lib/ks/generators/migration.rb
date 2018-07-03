@@ -31,7 +31,17 @@ module KS
         "create_function"  => {:func => ".udf"},
         "create_view"      => {:view => ".viw"},
         "create_trig"      => {:trig => ".trg"},
-        "create_table"     => {:table => ".tab"}
+        "create_table"     => {:table => ".tab"},
+        "change_procedure" => {:proc => ".prc" },
+        "change_function"  => {:func => ".udf"},
+        "change_view"      => {:view => ".viw"},
+        "change_trig"      => {:trig => ".trg"},
+        "change_table"     => {:table => ".tab"},
+        "delete_procedure" => {:proc => ".prc" },
+        "delete_function"  => {:func => ".udf"},
+        "delete_view"      => {:view => ".viw"},
+        "delete_trig"      => {:trig => ".trg"},
+        "delete_table"     => {:table => ".tab"},
       }
 
       def migration_file_name
