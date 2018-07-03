@@ -26,3 +26,11 @@ RSpec.shared_examples "temp_directory" do
     FileUtils.rm_rf(@tmp)
   end
 end
+
+RSpec.shared_examples "test_files" do
+  before do
+    File.write(migration_file,"some content")
+    File.write(src_file,"<%= File.read(\"#{File.expand_path(migration_file)}\") %>")
+  end
+
+end
