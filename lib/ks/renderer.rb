@@ -20,7 +20,7 @@ module KS
     def rewrite(file_name,content)
       context = instance_eval('binding')
       File.open(file_name,"w:windows-1251") do |f|
-        f.write ERB.new("#{content}").result(context)
+        f.write ERB.new("#{content}").result(context).force_encoding("windows-1251")
       end  
     end
 
