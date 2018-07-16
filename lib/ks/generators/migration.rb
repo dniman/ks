@@ -5,7 +5,6 @@ module KS
       using StringRefinements
 
       argument :name, :type => :string
-      class_option :directory, :type => :string
 
       def generate_migration
         context = instance_eval('binding')
@@ -61,13 +60,20 @@ module KS
       end
 
       def src_file_name(prefix)
-        if options[:directory]
-          "src/#{options[:directory]}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
+        if directory?
+          "src/#{directory}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
         else
           "src/#{NAME_PREFIXES[prefix].keys[0].to_s}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
         end  
       end
 
+      def directory?
+        !!options[:directory]
+      end
+
+      def directory
+        options[:directory]
+      end
     end
   end
 end
