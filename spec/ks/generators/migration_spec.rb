@@ -26,54 +26,54 @@ RSpec.describe KS::Generators::Migration do
     context "when -d option is not specified" do
       it "creates proc file" do
         instance = described_class.new(["create_procedure_some_procedure"])
-        expect { instance.generate_src_file }.to output(/create  src\/proc\/some_procedure.prc/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/proc\/dbo.some_procedure.prc/).to_stdout
       end
 
       it "creates func file" do
         instance = described_class.new(["create_function_some_function"])
-        expect { instance.generate_src_file }.to output(/create  src\/func\/some_function.udf/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/func\/dbo.some_function.udf/).to_stdout
       end
 
       it "creates view file" do
         instance = described_class.new(["create_view_some_view"])
-        expect { instance.generate_src_file }.to output(/create  src\/view\/some_view.viw/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/view\/dbo.some_view.viw/).to_stdout
       end  
       
       it "creates trg file" do
         instance = described_class.new(["create_trig_some_trig"])
-        expect { instance.generate_src_file }.to output(/create  src\/trig\/some_trig.trg/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/trig\/dbo.some_trig.trg/).to_stdout
       end       
 
       it "creates table file" do
         instance = described_class.new(["create_table_some_table"])
-        expect { instance.generate_src_file }.to output(/create  src\/table\/some_table.tab/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/table\/dbo.some_table.tab/).to_stdout
       end 
     end
 
     context "when -d options is specified" do
       it "creates proc file" do
         instance = described_class.new(["create_procedure_some_procedure"],config)
-        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/some_procedure.prc/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/dbo.some_procedure.prc/).to_stdout
       end
 
       it "creates func file" do
         instance = described_class.new(["create_function_some_function"],config)
-        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/some_function.udf/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/dbo.some_function.udf/).to_stdout
       end
 
       it "creates view file" do
         instance = described_class.new(["create_view_some_view"],config)
-        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/some_view.viw/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/dbo.some_view.viw/).to_stdout
       end      
 
       it "creates trig file" do
         instance = described_class.new(["create_trig_some_trig"],config)
-        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/some_trig.trg/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/dbo.some_trig.trg/).to_stdout
       end 
       
       it "creates table file" do
         instance = described_class.new(["create_table_some_table"],config)
-        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/some_table.tab/).to_stdout
+        expect { instance.generate_src_file }.to output(/create  src\/some_directory\/dbo.some_table.tab/).to_stdout
       end 
     end
 

@@ -61,9 +61,9 @@ module KS
 
       def src_file_name(prefix)
         if directory?
-          "src/#{directory}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
+          "src/#{directory}/dbo.#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
         else
-          "src/#{NAME_PREFIXES[prefix].keys[0].to_s}/#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
+          "src/#{NAME_PREFIXES[prefix].keys[0].to_s}/dbo.#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
         end  
       end
 
