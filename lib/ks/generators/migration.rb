@@ -52,7 +52,7 @@ module KS
       end
 
       def migration_number
-        Time.now.utc.strftime("%Y%m%d%H%M%S")
+        @migration_number ||= Time.now.utc.strftime("%Y%m%d%H%M%S")
       end
 
       def underscored_name
@@ -61,9 +61,9 @@ module KS
 
       def src_file_name(prefix)
         if directory?
-          "src/#{directory}/dbo.#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
+          "src/#{directory}/#{migration_number}_#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}.erb"
         else
-          "src/#{NAME_PREFIXES[prefix].keys[0].to_s}/dbo.#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}"
+          "src/#{NAME_PREFIXES[prefix].keys[0].to_s}/#{migration_number}_#{name.gsub(/^#{prefix}_/,"")}#{NAME_PREFIXES[prefix].values[0]}.erb"
         end  
       end
 
