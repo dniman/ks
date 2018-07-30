@@ -5,22 +5,26 @@ module KS
     include Thor::Actions
 
     def render
-      Dir.glob(File.join("**", "*.{prc,udf,trg,tab,viw}")).each do |file_name|
+      Dir.glob(File.join("**", "*.erb")).each do |file_name|
+        groups = file_name.match(/(^.*?\D*)\d*\w(.*?).erb/)
+        src_file_name = "".concat(groups[1],"dbo.",groups[2])
         content = File.readlines(file_name).first
 
         if content =~ /File.read/
-          rewrite file_name, content
-          say_status :update, relative_to_original_destination_root(File.expand_path(file_name)), {:verbose => true}
+          write_file_in_encoding src_file_name, content
+          say_status :create, relative_to_original_destination_root(File.expand_path(src_file_name)), {:verbose => true}
+          write_file_in_encoding file_name, ""
+          say_status :erase, relative_to_original_destination_root(File.expand_path(file_name)), {:verbose => true}
         end  
       end
     end
 
     protected
 
-    def rewrite(file_name,content)
+    def write_file_in_encoding(encoding = "windows-1251",file_name,content)
       context = instance_eval('binding')
-      File.open(file_name,"w:windows-1251") do |f|
-        f.write ERB.new("#{content}").result(context).force_encoding("windows-1251")
+      File.open(file_name,"w:#{encoding}") do |f|
+        f.write ERB.new("#{content}").result(context).force_encoding(encoding)
       end  
     end
 

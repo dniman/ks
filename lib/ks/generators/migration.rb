@@ -1,4 +1,13 @@
 module KS
+
+  SRC_EXTENSIONS = {
+    :proc => ".prc",
+    :func => ".udf",
+    :view => ".viw",
+    :trig => ".trg",
+    :table => ".tab"
+  }
+
   module Generators
     class Migration < Thor::Group
       include Thor::Actions
@@ -26,21 +35,21 @@ module KS
       protected
 
       NAME_PREFIXES = {
-        "create_procedure" => {:proc => ".prc" },
-        "create_function"  => {:func => ".udf"},
-        "create_view"      => {:view => ".viw"},
-        "create_trig"      => {:trig => ".trg"},
-        "create_table"     => {:table => ".tab"},
-        "change_procedure" => {:proc => ".prc" },
-        "change_function"  => {:func => ".udf"},
-        "change_view"      => {:view => ".viw"},
-        "change_trig"      => {:trig => ".trg"},
-        "change_table"     => {:table => ".tab"},
-        "delete_procedure" => {:proc => ".prc" },
-        "delete_function"  => {:func => ".udf"},
-        "delete_view"      => {:view => ".viw"},
-        "delete_trig"      => {:trig => ".trg"},
-        "delete_table"     => {:table => ".tab"},
+        "create_procedure" => {:proc => KS::SRC_EXTENSIONS[:proc] },
+        "create_function"  => {:func => KS::SRC_EXTENSIONS[:func] },
+        "create_view"      => {:view => KS::SRC_EXTENSIONS[:view] },
+        "create_trig"      => {:trig => KS::SRC_EXTENSIONS[:trig] },
+        "create_table"     => {:table => KS::SRC_EXTENSIONS[:table] },
+        "change_procedure" => {:proc => KS::SRC_EXTENSIONS[:proc] },
+        "change_function"  => {:func => KS::SRC_EXTENSIONS[:func] },
+        "change_view"      => {:view => KS::SRC_EXTENSIONS[:view] },
+        "change_trig"      => {:trig => KS::SRC_EXTENSIONS[:trig] },
+        "change_table"     => {:table => KS::SRC_EXTENSIONS[:table] },
+        "delete_procedure" => {:proc => KS::SRC_EXTENSIONS[:proc] },
+        "delete_function"  => {:func => KS::SRC_EXTENSIONS[:func] },
+        "delete_view"      => {:view => KS::SRC_EXTENSIONS[:view] },
+        "delete_trig"      => {:trig => KS::SRC_EXTENSIONS[:trig] },
+        "delete_table"     => {:table => KS::SRC_EXTENSIONS[:table] }
       }
 
       def migration_file_name

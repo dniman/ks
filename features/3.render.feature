@@ -17,5 +17,5 @@ Feature: Render
       When I run `ks render`
       Then the output should match:
       """
-      update  src\/*
+      create  src\/*
       """

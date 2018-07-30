@@ -29,7 +29,7 @@ Feature: Generate migration
       """
       And the output should match:
       """
-      create  src/proc/dbo.new_procedure.prc
+      create  src/proc/\d{14}_new_procedure.prc.erb
       """
 
     Scenario: Create proc file in custom directory
@@ -37,7 +37,7 @@ Feature: Generate migration
       When I run `ks generate migration create_procedure_new_procedure -d some_directory`
       Then the output should match:
       """
-      create  src/some_directory/dbo.new_procedure.prc
+      create  src/some_directory/\d{14}_new_procedure.prc
       """
 
     Scenario: Create migration and func files
@@ -49,7 +49,7 @@ Feature: Generate migration
       """
       And the output should match:
       """
-      create  src/func/dbo.new_function.udf
+      create  src/func/\d{14}_new_function.udf
       """
 
     Scenario: Create func file in custom directory
@@ -57,7 +57,7 @@ Feature: Generate migration
       When I run `ks generate migration create_function_new_function -d some_directory`
       Then the output should match:
       """
-      create  src/some_directory/dbo.new_function.udf
+      create  src/some_directory/\d{14}_new_function.udf
       """    
 
     Scenario: Create migration and view files
@@ -69,7 +69,7 @@ Feature: Generate migration
       """
       And the output should match:
       """
-      create  src/view/dbo.new_view.viw
+      create  src/view/\d{14}_new_view.viw
       """
 
     Scenario: Create view file in custom directory
@@ -77,7 +77,7 @@ Feature: Generate migration
       When I run `ks generate migration create_view_new_view -d some_directory`
       Then the output should match:
       """
-      create  src/some_directory/dbo.new_view.viw
+      create  src/some_directory/\d{14}_new_view.viw
       """ 
 
     Scenario: Create migration and trig files
@@ -89,7 +89,7 @@ Feature: Generate migration
       """
       And the output should match:
       """
-      create  src/trig/dbo.new_trig.trg
+      create  src/trig/\d{14}_new_trig.trg
       """
 
     Scenario: Create trig file in custom directory
@@ -97,7 +97,7 @@ Feature: Generate migration
       When I run `ks generate migration create_trig_new_trig -d some_directory`
       Then the output should match:
       """
-      create  src/some_directory/dbo.new_trig.trg
+      create  src/some_directory/\d{14}_new_trig.trg
       """ 
 
     Scenario: Create migration and table files
@@ -109,7 +109,7 @@ Feature: Generate migration
       """
       And the output should match:
       """
-      create  src/table/dbo.new_table.tab
+      create  src/table/\d{14}_new_table.tab
       """
 
     Scenario: Create table file in custom directory
@@ -117,5 +117,5 @@ Feature: Generate migration
       When I run `ks generate migration create_table_new_table -d some_directory`
       Then the output should match:
       """
-      create  src/some_directory/dbo.new_table.tab
+      create  src/some_directory/\d{14}_new_table.tab
       """       
