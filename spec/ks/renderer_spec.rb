@@ -27,9 +27,9 @@ RSpec.describe KS::Renderer do
 
         it "should erase erb file" do
           expect(instance).to receive(:write_file_in_encoding).at_least(2).times
-          instance.shell.mute do 
+          #instance.shell.mute do 
             instance.render
-          end
+          #end
         end
 
         it "should print erase status" do

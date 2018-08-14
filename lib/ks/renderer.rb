@@ -21,7 +21,7 @@ module KS
 
     protected
 
-    def write_file_in_encoding(encoding = "windows-1251",file_name,content)
+    def write_file_in_encoding(file_name,content,encoding = "windows-1251")
       context = instance_eval('binding')
       File.open(file_name,"w:#{encoding}") do |f|
         f.write ERB.new("#{content}").result(context).force_encoding(encoding)
