@@ -4,7 +4,7 @@ Feature: cvs login
   As a user
   I want to run command ks cvs login
 
-    Scenario: Print error message
+    Scenario: Password prompt
       When I run `ks cvs login`
       Then the output should contain:
       """
