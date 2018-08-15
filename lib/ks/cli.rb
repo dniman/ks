@@ -46,6 +46,13 @@ module KS
       KS::Renderer.start      
     end
 
+    desc "cvs", "Working with CVS"
+    def cvs(*args)
+      msg = "Can't run command outside of working directory" 
+      raise Error, msg unless app_root
+      
+    end
+
     def initialize(args = [], local_options = {}, config = {})
       @app_root = config[:app_root]
       super

@@ -76,4 +76,15 @@ RSpec.describe KS::CLI do
 
     end
   end
+
+  describe "cvs" do
+    context "when #app_root is nil" do
+      it "prints error message" do
+        msg = "Can't run command outside of working directory"
+        
+        instance = described_class.new
+        expect { instance.invoke(:cvs) }.to raise_error(Thor::Error, msg)
+      end
+    end
+  end
 end
